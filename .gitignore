@@ -1,8 +1,3 @@
 .idea/
-*/.idea
-
-/sandbox/settings.gradle
-addressbook-tests/.gradle/
-sandbox/.gradle/
-sandbox/build.gradle
-sandbox/build/tmp/
+*/.idea/
+*/.gradle/
