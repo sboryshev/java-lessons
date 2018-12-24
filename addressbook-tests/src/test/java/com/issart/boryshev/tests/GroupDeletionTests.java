@@ -2,7 +2,7 @@ package com.issart.boryshev.tests;
 
 import org.testng.annotations.Test;
 
-public class GroupDeletionTest extends TestBase{
+public class GroupDeletionTests extends TestBase{
 
     @Test
     public void testGroupDelete() {

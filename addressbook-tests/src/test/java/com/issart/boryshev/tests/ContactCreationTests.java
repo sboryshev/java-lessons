@@ -3,7 +3,7 @@ package com.issart.boryshev.tests;
 import com.issart.boryshev.model.ContactData;
 import org.testng.annotations.Test;
 
-public class ContactCreationTest extends TestBase{
+public class ContactCreationTests extends TestBase{
 
     @Test
     public void testContactCreate() {

@@ -3,7 +3,7 @@ package com.issart.boryshev.tests;
 import com.issart.boryshev.model.GroupData;
 import org.testng.annotations.Test;
 
-public class GroupCreationTest extends TestBase{
+public class GroupCreationTests extends TestBase{
 
     @Test
     public void testGroupCreate() {
