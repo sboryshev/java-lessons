@@ -2,11 +2,11 @@ package com.issart.boryshev.appmanager;
 
 import com.issart.boryshev.model.ContactData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 
 public class ContactHelper extends HelperBase {
 
-    public ContactHelper (FirefoxDriver driver) {
+    public ContactHelper(WebDriver driver) {
         super(driver);
     }
 
@@ -14,9 +14,13 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("home page"));
     }
 
-//    public void submitContactCreation() {
-//        driver.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
-//    }
+    public void goToContactCreationPage() {
+        if (isElementPresent(By.tagName("h1"))
+            && driver.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
+            return;
+        }
+        click(By.linkText("add new"));
+    }
 
     public void fillContactFields(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstName());
@@ -35,8 +39,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void submitContactCreation() {
-        click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])" +
-            "[1]/following::input[1]"));
+        click(By.xpath("//input[@type='submit'][2]"));
     }
 
     public void selectContact() {
@@ -44,8 +47,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void deleteSelectedContacts() {
-        click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Select all'])" +
-            "[1]/following::input[2]"));
+        click(By.xpath("//input[@type='button' and @value='Delete']"));
     }
 
     public void acceptAlert() {
@@ -55,10 +57,21 @@ public class ContactHelper extends HelperBase {
     }
 
     public void editContact() {
-        click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='home+79988654565987532'])[1]/following::img[2]"));
+        click(By.xpath("//img[@title=\"Edit\"]"));
     }
 
     public void submitContactUpdate() {
-        click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]"));
+        click(By.name("update"));
+    }
+
+    public void createContact(ContactData contact) {
+        goToContactCreationPage();
+        fillContactFields(contact);
+        submitContactCreation();
+        returnToHomePage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }
