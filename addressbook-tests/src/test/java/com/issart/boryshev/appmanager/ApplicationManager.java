@@ -30,12 +30,12 @@ public class ApplicationManager {
             driver = new EdgeDriver();
         }
 
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         driver.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(driver);
         contactHelper = new ContactHelper(driver);
         navigationHelper = new NavigationHelper(driver);
         sessionHelper = new SessionHelper(driver);
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         sessionHelper.login("admin", "secret");
     }
 
