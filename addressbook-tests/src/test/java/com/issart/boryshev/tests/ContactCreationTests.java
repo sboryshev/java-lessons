@@ -1,31 +1,32 @@
 package com.issart.boryshev.tests;
 
-import java.util.Comparator;
-import java.util.List;
 import com.issart.boryshev.model.ContactData;
-import org.testng.Assert;
+import com.issart.boryshev.model.Contacts;
 import org.testng.annotations.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreate() {
-        app.getContactHelper().goToHomePage();
-        List<ContactData> before = app.getContactHelper().getContactList();
+        app.goTo().homePage();
+        Contacts before = app.contact().all();
 
-        ContactData contact = new ContactData("kefir", "nerd",
-            "man", "nick", "title", "company", "address",
-            null, null, null, null, null, null);
-        app.getContactHelper().createContact(contact);
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), before.size() + 1);
+        ContactData contact = new ContactData()
+            .withFirstName("kefir")
+            .withLastName("nerd")
+            .withMiddleName("man")
+            .withNickname("nick")
+            .withTitle("title")
+            .withCompany("company")
+            .withAddress("address");
+        app.contact().create(contact);
+        Contacts after = app.contact().all();
 
-        contact.setId(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());
-        before.add(contact);
-
-        Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(before, after);
+        assertThat(after.size(), equalTo(before.size() + 1));
+        assertThat(after, equalTo(
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 }

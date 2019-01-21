@@ -1,26 +1,32 @@
 package com.issart.boryshev.tests;
 
-import java.util.List;
 import com.issart.boryshev.model.GroupData;
-import org.testng.Assert;
+import com.issart.boryshev.model.Groups;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class GroupDeletionTests extends TestBase{
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+public class GroupDeletionTests extends TestBase {
+
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().groupPage();
+        if (app.group().all().size() == 0) {
+            app.group().create(new GroupData().withName("test1"));
+        }
+    }
 
     @Test
     public void testGroupDelete() {
-        app.getNavigationHelper().goToGroupPage();
-        if (!app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData("testgroup2", null, null));
-        }
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().selectGroup(0);
-        app.getGroupHelper().deleteSelectedGroups();
-        app.getGroupHelper().returnToGroupPage();
-        List<GroupData> after = app.getGroupHelper().getGroupList();
-        Assert.assertEquals(after.size(), before.size() - 1);
+        Groups before = app.group().all();
+        GroupData deletedGroup = before.iterator().next();
+        app.group().delete(deletedGroup);
+        Groups after = app.group().all();
 
-        before.remove(0);
-        Assert.assertEquals(before, after);
+        assertThat(after.size(), equalTo(before.size() - 1));
+        assertThat(after, equalTo(before.without(deletedGroup)));
     }
+
 }

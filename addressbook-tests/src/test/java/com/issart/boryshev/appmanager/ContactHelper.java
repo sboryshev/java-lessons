@@ -1,8 +1,10 @@
 package com.issart.boryshev.appmanager;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import com.issart.boryshev.model.ContactData;
+import com.issart.boryshev.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,10 +13,6 @@ public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver driver) {
         super(driver);
-    }
-
-    public void returnToHomePage() {
-        click(By.linkText("home page"));
     }
 
     public void goToHomePage() {
@@ -56,6 +54,10 @@ public class ContactHelper extends HelperBase {
         driver.findElements(By.name("selected[]")).get(index).click();
     }
 
+    public void selectContactById(int id) {
+        driver.findElement(By.cssSelector("input[id='" + id + "']")).click();
+    }
+
     public void deleteSelectedContacts() {
         click(By.xpath("//input[@type='button' and @value='Delete']"));
     }
@@ -66,19 +68,15 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void editContact(int index) {
-        click(By.xpath("(//img[@title=\"Edit\"])[" + (index + 1) + "]"));
-    }
-
     public void submitContactUpdate() {
         click(By.name("update"));
     }
 
-    public void createContact(ContactData contact) {
+    public void create(ContactData contact) {
         goToContactCreationPage();
         fillContactFields(contact);
         submitContactCreation();
-        returnToHomePage();
+        goToHomePage();
     }
 
     public boolean isThereAContact() {
@@ -89,18 +87,35 @@ public class ContactHelper extends HelperBase {
         return driver.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
-        List<ContactData> contacts = new ArrayList<>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = driver.findElements(By.name("entry"));
         for (WebElement element : elements) {
             String firstName = element.findElement(By.xpath("td[3]")).getText();
             String lastName = element.findElement(By.xpath("td[2]")).getText();
             int id = Integer.parseInt(element.findElement(By.xpath("td[@class=\"center\"]//input")).getAttribute("id"));
-            ContactData contact = new ContactData(id, firstName, null, lastName,
-                null, null, null, null, null, null,
-                null, null, null, null);
-            contacts.add(contact);
+            contacts.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
         }
         return contacts;
+    }
+
+    public void modify(ContactData contact) throws InterruptedException {
+        editContactById(contact.getId());
+        fillContactFields(contact);
+        submitContactUpdate();
+        Thread.sleep(1000);
+        goToHomePage();
+    }
+
+    private void editContactById(int id) {
+        click(By.cssSelector("a[href='edit.php?id=" + id + "']"));
+    }
+
+    public void delete(ContactData contact) throws InterruptedException {
+        selectContactById(contact.getId());
+        deleteSelectedContacts();
+        acceptAlert();
+        Thread.sleep(1000);
+        goToHomePage();
     }
 }
