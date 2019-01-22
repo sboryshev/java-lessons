@@ -21,11 +21,16 @@ public class ContactCreationTests extends TestBase {
             .withNickname("nick")
             .withTitle("title")
             .withCompany("company")
-            .withAddress("address");
+            .withAddress("address")
+            .withEmail1("asd@asdf.qwe")
+            .withEmail2("twerhh@ksdfg.vikd")
+            .withEmail3("fasdkfjlkj@sdggh.awed")
+            .withHomePhone("45621")
+            .withMobilePhone("+7987454")
+            .withWorkPhone("2213");
         app.contact().create(contact);
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();
-
-        assertThat(after.size(), equalTo(before.size() + 1));
         assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }

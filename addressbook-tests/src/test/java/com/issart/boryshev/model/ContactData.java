@@ -15,10 +15,10 @@ public class ContactData {
     private String mobile;
     private String work;
     private String fax;
-    private String email;
+    private String email1;
+    private String email2;
+    private String email3;
     private String homepage;
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -84,17 +84,17 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withHome(String home) {
+    public ContactData withHomePhone(String home) {
         this.home = home;
         return this;
     }
 
-    public ContactData withMobile(String mobile) {
+    public ContactData withMobilePhone(String mobile) {
         this.mobile = mobile;
         return this;
     }
 
-    public ContactData withWork(String work) {
+    public ContactData withWorkPhone(String work) {
         this.work = work;
         return this;
     }
@@ -104,8 +104,18 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withEmail(String email) {
-        this.email = email;
+    public ContactData withEmail1(String email1) {
+        this.email1 = email1;
+        return this;
+    }
+
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
         return this;
     }
 
@@ -146,15 +156,15 @@ public class ContactData {
         return address;
     }
 
-    public String getHome() {
+    public String getHomePhone() {
         return home;
     }
 
-    public String getMobile() {
+    public String getMobilePhone() {
         return mobile;
     }
 
-    public String getWork() {
+    public String getWorkPhone() {
         return work;
     }
 
@@ -162,8 +172,16 @@ public class ContactData {
         return fax;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmail1() {
+        return email1;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public String getEmail3() {
+        return email3;
     }
 
     public String getHomepage() {

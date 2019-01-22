@@ -1,7 +1,6 @@
 package com.issart.boryshev.appmanager;
 
 import java.util.concurrent.TimeUnit;
-import com.issart.boryshev.model.ContactData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;

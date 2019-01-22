@@ -22,11 +22,13 @@ public class ContactModificationTests extends TestBase {
                 .withNickname("nick123")
                 .withCompany("company123")
                 .withAddress("address123")
-                .withHome("65434")
+                .withHomePhone("65434")
                 .withFax("657")
-                .withMobile("+798545375242")
-                .withWork("7984344")
-                .withEmail("company123@gmail.com")
+                .withMobilePhone("+798545375242")
+                .withWorkPhone("7984344")
+                .withEmail1("company123@gmail.com")
+                .withEmail2("twerhh@ksdfg.vikd")
+                .withEmail3("fasdkfjlkj@sdggh.awed")
                 .withHomepage("http://asdsga.com"));
         }
     }
@@ -44,17 +46,17 @@ public class ContactModificationTests extends TestBase {
             .withTitle("title")
             .withCompany("company")
             .withAddress("address")
-            .withHome("home")
-            .withMobile("+79998884455")
-            .withWork("98745")
+            .withHomePhone("home")
+            .withMobilePhone("+79998884455")
+            .withWorkPhone("98745")
             .withFax("5467")
-            .withEmail("asfdb@jkdhgf.com")
+            .withEmail1("asfdb@jkdhgf.com")
+            .withEmail2("fdaskjfh@jgfdk")
+            .withEmail3("kgpkdjflkguj@dsgslkhj.gfik")
             .withHomepage("jfghgjhg.com");
-
         app.contact().modify(contact);
+        assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.contact().all();
-
-        assertThat(after.size(), equalTo(before.size()));
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
     }
 }
