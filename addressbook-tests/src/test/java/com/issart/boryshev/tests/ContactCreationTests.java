@@ -1,7 +1,16 @@
 package com.issart.boryshev.tests;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.issart.boryshev.model.ContactData;
 import com.issart.boryshev.model.Contacts;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -9,25 +18,26 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-    @Test
-    public void testContactCreate() {
+    @DataProvider
+    public Iterator<Object[]> validContacts() throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"))) {
+            String json = "";
+            String line = reader.readLine();
+            while (line != null) {
+                json += line;
+                line = reader.readLine();
+            }
+            Gson gson = new Gson();
+            List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {
+            }.getType());
+            return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+        }
+    }
+
+    @Test(dataProvider = "validContacts")
+    public void testContactCreate(ContactData contact) {
         app.goTo().homePage();
         Contacts before = app.contact().all();
-
-        ContactData contact = new ContactData()
-            .withFirstName("kefir")
-            .withLastName("nerd")
-            .withMiddleName("man")
-            .withNickname("nick")
-            .withTitle("title")
-            .withCompany("company")
-            .withAddress("address")
-            .withEmail1("asd@asdf.qwe")
-            .withEmail2("twerhh@ksdfg.vikd")
-            .withEmail3("fasdkfjlkj@sdggh.awed")
-            .withHomePhone("45621")
-            .withMobilePhone("+7987454")
-            .withWorkPhone("2213");
         app.contact().create(contact);
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();

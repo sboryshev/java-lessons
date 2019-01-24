@@ -1,0 +1,72 @@
+[
+  {
+    "firstName": "name0",
+    "middleName": "middlename0",
+    "lastName": "surname0",
+    "nickname": "nick0",
+    "title": "test0",
+    "address": "address0",
+    "home": "78954120",
+    "mobile": "+789554240",
+    "work": "45610",
+    "email1": "email10@gmail.com",
+    "email2": "email20@gmail.com",
+    "email3": "email30@gmail.com"
+  },
+  {
+    "firstName": "name1",
+    "middleName": "middlename1",
+    "lastName": "surname1",
+    "nickname": "nick1",
+    "title": "test1",
+    "address": "address1",
+    "home": "78954121",
+    "mobile": "+789554241",
+    "work": "45611",
+    "email1": "email11@gmail.com",
+    "email2": "email21@gmail.com",
+    "email3": "email31@gmail.com"
+  },
+  {
+    "firstName": "name2",
+    "middleName": "middlename2",
+    "lastName": "surname2",
+    "nickname": "nick2",
+    "title": "test2",
+    "address": "address2",
+    "home": "78954122",
+    "mobile": "+789554242",
+    "work": "45612",
+    "email1": "email12@gmail.com",
+    "email2": "email22@gmail.com",
+    "email3": "email32@gmail.com"
+  },
+  {
+    "firstName": "name3",
+    "middleName": "middlename3",
+    "lastName": "surname3",
+    "nickname": "nick3",
+    "title": "test3",
+    "address": "address3",
+    "home": "78954123",
+    "mobile": "+789554243",
+    "work": "45613",
+    "email1": "email13@gmail.com",
+    "email2": "email23@gmail.com",
+    "email3": "email33@gmail.com"
+  },
+  {
+    "firstName": "name4",
+    "middleName": "middlename4",
+    "lastName": "surname4",
+    "nickname": "nick4",
+    "title": "test4",
+    "address": "address4",
+    "home": "78954124",
+    "mobile": "+789554244",
+    "work": "45614",
+    "email1": "email14@gmail.com",
+    "email2": "email24@gmail.com",
+    "email3": "email34@gmail.com"
+  }
+]

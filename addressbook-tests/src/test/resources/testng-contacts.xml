@@ -1,0 +1,14 @@
+<suite name="Suite1" verbose="1">
+
+  <test name="Contacts">
+    <classes>
+      <class name="com.issart.boryshev.tests.ContactCreationTests" />
+      <class name="com.issart.boryshev.tests.ContactModificationTests" />
+      <class name="com.issart.boryshev.tests.ContactAddressTests" />
+      <class name="com.issart.boryshev.tests.ContactEmailTests" />
+      <class name="com.issart.boryshev.tests.ContactPhoneTests" />
+      <class name="com.issart.boryshev.tests.ContactDeletionTests" />
+    </classes>
+  </test>
+
+</suite>

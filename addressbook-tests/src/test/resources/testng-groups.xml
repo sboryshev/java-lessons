@@ -1,0 +1,11 @@
+<suite name="Suite1" verbose="1">
+
+  <test name="Groups">
+    <classes>
+      <class name="com.issart.boryshev.tests.GroupCreationTests" />
+      <class name="com.issart.boryshev.tests.GroupModificationTests" />
+      <class name="com.issart.boryshev.tests.GroupDeletionTests" />
+    </classes>
+  </test>
+
+</suite>
