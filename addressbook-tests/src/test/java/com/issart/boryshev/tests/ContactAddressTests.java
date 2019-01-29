@@ -11,8 +11,7 @@ public class ContactAddressTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().homePage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
             app.contact().create(new ContactData()
                 .withFirstName("name123")
                 .withLastName("lastname123")
@@ -37,7 +36,6 @@ public class ContactAddressTests extends TestBase {
         app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-
         assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
     }
 }

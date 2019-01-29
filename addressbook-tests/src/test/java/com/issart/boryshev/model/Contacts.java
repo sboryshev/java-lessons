@@ -1,5 +1,6 @@
 package com.issart.boryshev.model;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import com.google.common.collect.ForwardingSet;
@@ -14,6 +15,10 @@ public class Contacts extends ForwardingSet<ContactData> {
 
     public Contacts() {
         this.delegate = new HashSet<>();
+    }
+
+    public Contacts(Collection<ContactData> contacts) {
+        this.delegate = new HashSet<>(contacts);
     }
 
     @Override
@@ -31,5 +36,15 @@ public class Contacts extends ForwardingSet<ContactData> {
         Contacts contacts = new Contacts(this);
         contacts.remove(contact);
         return contacts;
+    }
+
+    public ContactData getById(int id) {
+        ContactData contactData = null;
+        for (ContactData c : this) {
+            if (c.getId() == id) {
+                contactData = c;
+            }
+        }
+        return contactData;
     }
 }

@@ -8,6 +8,8 @@
       <class name="com.issart.boryshev.tests.ContactEmailTests" />
       <class name="com.issart.boryshev.tests.ContactPhoneTests" />
       <class name="com.issart.boryshev.tests.ContactDeletionTests" />
+      <class name="com.issart.boryshev.tests.AddContactToGroupTests" />
+      <class name="com.issart.boryshev.tests.DeleteContactFromGroupTests" />
     </classes>
   </test>
 

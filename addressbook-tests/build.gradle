@@ -18,6 +18,8 @@ dependencies {
     compile 'com.beust:jcommander:1.48'
     compile 'com.google.code.gson:gson:2.8.5'
     compile 'org.avaje.composite:logback:1.1'
+    compile 'mysql:mysql-connector-java:8.0.14'
+    compile 'org.hibernate:hibernate-core:5.4.1.Final'
 }
 
 task testGroups(type: Test) {
@@ -30,6 +32,9 @@ task testGroups(type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
 }
 
 task testContacts(type: Test) {
@@ -41,5 +46,8 @@ task testContacts(type: Test) {
     }
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }

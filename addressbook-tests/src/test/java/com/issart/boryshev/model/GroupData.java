@@ -1,16 +1,40 @@
 package com.issart.boryshev.model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+@Entity
+@Table(name = "group_list")
 public class GroupData {
+
+    @Id
+    @Column(name = "group_id")
     private int id = Integer.MAX_VALUE;
+
     @Expose
+    @Column(name = "group_name")
     private String name;
+
     @Expose
+    @Column(name = "group_header")
+    @Type(type = "text")
     private String header;
+
     @Expose
+    @Column(name = "group_footer")
+    @Type(type = "text")
     private String footer;
+
+    @ManyToMany(mappedBy = "groups")
+    private Set<ContactData> contacts = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -18,12 +42,14 @@ public class GroupData {
         if (o == null || getClass() != o.getClass()) return false;
         GroupData groupData = (GroupData) o;
         return id == groupData.id &&
-            Objects.equals(name, groupData.name);
+            Objects.equals(name, groupData.name) &&
+            Objects.equals(header, groupData.header) &&
+            Objects.equals(footer, groupData.footer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, header, footer);
     }
 
     @Override
@@ -48,6 +74,10 @@ public class GroupData {
 
     public String getFooter() {
         return footer;
+    }
+
+    public Contacts getContacts() {
+        return new Contacts(contacts);
     }
 
     public GroupData withId(int id) {

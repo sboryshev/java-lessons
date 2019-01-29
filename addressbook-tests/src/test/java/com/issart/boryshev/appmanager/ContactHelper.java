@@ -46,7 +46,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
         type(By.name("homepage"), contactData.getHomepage());
-        attach(By.name("photo"), contactData.getPhoto());
+      //  attach(By.name("photo"), contactData.getPhoto());
     }
 
     public void submitContactCreation() {
@@ -160,5 +160,21 @@ public class ContactHelper extends HelperBase {
             .withEmail1(email1)
             .withEmail2(email2)
             .withEmail3(email3);
+    }
+
+    public void addToGroup(ContactData addingContact, int groupId) {
+        selectContactById(addingContact.getId());
+        WebElement element = driver.findElement(By.name("to_group"));
+        element.click();
+        element.findElement((By.xpath("./option[@value=" + groupId + "]"))).click();
+        driver.findElement(By.name("add")).click();
+    }
+
+    public void deleteFromGroup(ContactData deletingContact, int id) {
+        WebElement element = driver.findElement(By.name("group"));
+        element.click();
+        element.findElement((By.xpath("./option[@value=" + id + "]"))).click();
+        selectContactById(deletingContact.getId());
+        driver.findElement(By.name("remove")).click();
     }
 }
