@@ -1,12 +1,17 @@
 package com.issart.sboryshev.mantis.tests;
 
+import java.net.MalformedURLException;
 import java.util.List;
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import com.issart.sboryshev.mantis.model.MailMessage;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 
 public class ChangePasswordTests extends TestBase {
+
+    public ChangePasswordTests() throws MalformedURLException, ServiceException {
+    }
 
     @Test
     public void testChangePassword() throws MessagingException {

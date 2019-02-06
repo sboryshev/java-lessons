@@ -1,8 +1,10 @@
 package com.issart.sboryshev.mantis.tests;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import com.issart.sboryshev.mantis.model.MailMessage;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
@@ -11,7 +13,10 @@ import static org.testng.Assert.assertTrue;
 
 public class RegistrationTests extends TestBase {
 
-   // @BeforeMethod
+    public RegistrationTests() throws MalformedURLException, ServiceException {
+    }
+
+    // @BeforeMethod
     public void startMailServer() {
         app.mail().start();
     }
