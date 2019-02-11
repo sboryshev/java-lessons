@@ -12,9 +12,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 
 public class ApplicationManager {
-    private final Properties properties;
     WebDriver driver;
 
+    private final Properties properties;
     private String browser;
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
@@ -27,6 +27,11 @@ public class ApplicationManager {
     public ApplicationManager(String browser) {
         this.browser = browser;
         properties = new Properties();
+        try {
+            init();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void init() throws IOException {

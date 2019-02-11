@@ -24,7 +24,7 @@ public class TestBase {
 
     public TestBase() throws MalformedURLException, ServiceException {
         mc = new MantisConnectLocator()
-            .getMantisConnectPort(new URL("http://localhost/mantisbt-1.2.19/api/soap/mantisconnect.php"));
+            .getMantisConnectPort(new URL(app.getProperty("web.mantisConnectPort")));
     }
 
     @BeforeSuite
@@ -41,8 +41,9 @@ public class TestBase {
     }
 
     public boolean isIssueOpen(BigInteger issueId) throws RemoteException {
-        String status = mc.
-            mc_issue_get("administrator", "root", issueId).getStatus().getName();
+        String status = mc.mc_issue_get(
+            app.getProperty("web.adminLogin"),
+            app.getProperty("web.adminPassword"), issueId).getStatus().getName();
         return status.equals("new") ;
     }
 

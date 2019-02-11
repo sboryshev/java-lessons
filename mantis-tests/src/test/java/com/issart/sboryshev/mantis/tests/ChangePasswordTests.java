@@ -15,8 +15,8 @@ public class ChangePasswordTests extends TestBase {
 
     @Test
     public void testChangePassword() throws MessagingException {
-        String new_password = "newPassword";
         long now = System.currentTimeMillis();
+        String new_password = "newPassword";
         String email = String.format("user%s@localhost", now);
         String user = String.format("user%s", now);
         String password = "password";

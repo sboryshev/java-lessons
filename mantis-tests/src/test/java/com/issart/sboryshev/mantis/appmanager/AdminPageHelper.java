@@ -9,6 +9,7 @@ public class AdminPageHelper extends HelperBase {
     }
 
     public void goToManageUserPage() {
+        click(By.xpath("//a[@href=\"/mantisbt-1.2.19/manage_overview_page.php\"]"));
         click(By.xpath("//a[@href=\"/mantisbt-1.2.19/manage_user_page.php\"]"));
     }
 

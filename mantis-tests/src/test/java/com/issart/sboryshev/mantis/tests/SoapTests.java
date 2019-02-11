@@ -1,12 +1,9 @@
 package com.issart.sboryshev.mantis.tests;
 
-import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Set;
 import javax.xml.rpc.ServiceException;
-import biz.futureware.mantis.rpc.soap.client.IssueData;
-import biz.futureware.mantis.rpc.soap.client.ObjectRef;
 import com.issart.sboryshev.mantis.model.Issue;
 import com.issart.sboryshev.mantis.model.Project;
 import org.testng.annotations.Test;
