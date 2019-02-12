@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -37,7 +36,7 @@ public class ApplicationManager {
 
         dbHelper = new DbHelper();
 
-        if ("" .equals(properties.getProperty("selenium.server"))) {
+        if ("".equals(properties.getProperty("selenium.server"))) {
             if (browser.equals(BrowserType.FIREFOX)) {
                 driver = new FirefoxDriver();
             } else if (browser.equals(BrowserType.CHROME)) {
